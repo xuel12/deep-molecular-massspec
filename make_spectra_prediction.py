@@ -22,19 +22,23 @@ from absl import app
 from absl import flags
 from absl import logging
 
+import os
+os.chdir('/Users/xuel12/Documents/MSdatascience/CS7180AI/small-molecular-ms/deep-molecular-massspec')
+
 import spectra_predictor
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file', 'input.sdf',
+flags.DEFINE_string('input_file', 'examples/pentachlorobenzene.sdf',
                     'Name of input file for predictions.')
 flags.DEFINE_string('weights_dir',
-                    '/usr/local/massspec_weights',
+                    '/Users/xuel12/Documents/MSdatascience/CS7180AI/small-molecular-ms/massspec_weights',
                     'Name of directory that stores model weights.')
-flags.DEFINE_string('output_file', 'annotated.sdf',
+flags.DEFINE_string('output_file', 'tmp/annotated.sdf',
                     'Name of output file for predictions.')
 
 
 def main(_):
+
   logging.info('Loading weights from %s', FLAGS.weights_dir)
   predictor = spectra_predictor.NeimsSpectraPredictor(
       model_checkpoint_dir=FLAGS.weights_dir)
